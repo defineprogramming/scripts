@@ -1,0 +1,20 @@
+@echo off
+
+echo Installing Python 3.11.1 without admin rights
+
+echo Creating install folder...
+if not exist C:\Python311 mkdir C:\Python311
+
+echo Downloading Python installer... 
+powershell Invoke-WebRequest https://www.python.org/ftp/python/3.11.1/python-3.11.1-amd64.exe -OutFile C:\Python311\python-3.11.1-amd64.exe 
+
+echo Installing Python...
+C:\Python311\python-3.11.1-amd64.exe /quiet InstallAllUsers=0 PrependPath=1 Include_test=0 TargetDir=C:\Python311
+
+echo Adding Python to PATH...
+setx PATH "%PATH%;C:\Python311" 
+
+echo Python 3.11.1 installed!
+echo You may need to restart your shell for the PATH changes to take effect.
+
+pause
